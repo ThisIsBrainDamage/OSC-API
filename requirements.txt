@@ -1,0 +1,5 @@
+asyncpg==0.25.0
+fastapi==0.75.0
+python-dotenv==0.19.2
+slowapi==0.1.5
+uvicorn==0.17.5
