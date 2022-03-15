@@ -15,7 +15,7 @@ import asyncio
 from dotenv import load_dotenv
 
 # -Local imports-
-from classes import DataBaseItem, Item
+from .classes import DataBaseItem, Item
 
 
 # load enviroment variables
@@ -77,7 +77,7 @@ async def fetch_all() -> Union[List[asyncpg.Record], None]:
 
     if not len(items_list):
         return None
-    print(items_list)
+
     return items_list
 
 
@@ -106,7 +106,7 @@ async def fetch_item(name : str) -> Union[DataBaseItem, None]:
         item[2],
         item[3]
     )
-    print(item)
+    
     return item
 
 
