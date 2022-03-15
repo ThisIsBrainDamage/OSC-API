@@ -24,7 +24,7 @@ from slowapi.errors import RateLimitExceeded
 import uvicorn
 
 # -Local imports-
-from api.routers import test
+from api.routers import testing
 
 # --End of imports--
 
@@ -62,7 +62,7 @@ app.add_middleware(
 
 # Endpoitns
 
-app.include_router(test)
+app.include_router(testing)
 
 @app.get("/")
 async def home(request : Request):
