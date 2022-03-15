@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request, Header
 from fastapi.responses import RedirectResponse
 
-from ..auth import AuthDetails, authenticate
+from ..auth import authenticate
 from ..database import inventory_insert, Item, fetch_all, fetch_item
 
 tags = [
@@ -18,7 +18,6 @@ async def get_db(request : Request, username : str = Header(None), password : st
     if authenticated != True:
         return HTTPException(403, authenticated, "JuSt gEt GoOD BRo")
 
-    # await inventory_insert(Item("lol", "does lol things"))
-    data = await fetch_item("lol")
+    data = await fetch_all()
 
     return data

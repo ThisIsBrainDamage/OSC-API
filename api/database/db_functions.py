@@ -142,12 +142,14 @@ async def inventory_delete(name : str, amount : Union[int, str] = 1) -> None:
     if not len(item_list):
         return
 
-    if isinstance(amount, str) and amount.lower() == "all":
-        await connection.execute("""DELETE FROM Inventory WHERE name='{}'""".format(name))
-    elif isinstance(amount, int):
+    try:
+        amount = int(amount)
         amount = (item_list[0][3]) - amount
         await connection.execute("""UPDATE Inventory SET quantity={} WHERE name='{}'""".format(amount, name))
-
+    except ValueError:
+        if amount.lower() == "all":
+            await connection.execute("""DELETE FROM Inventory WHERE name='{}'""".format(name))
+            
     await connection.close()
 
 
