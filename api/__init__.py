@@ -1,1 +1,1 @@
-from .auth import AuthDetails, authenticate
+from auth import classes
