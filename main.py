@@ -21,7 +21,6 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
 # Other imports
-from dotenv import load_dotenv
 import uvicorn
 
 # -Local imports-
@@ -60,9 +59,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-load_dotenv()
-DATABASE_URL = os.environ["DATABASE_URL"]
 
 # Endpoitns
 
