@@ -10,6 +10,9 @@ load_dotenv()
 
 
 async def authenticate(username: str, password : str):
+    if username is None or password is None:
+        return "You must provide a username AND password"
+    
     real_username = os.environ["USERNAME"]
     if real_username != username:
         return "Invalid Username"
