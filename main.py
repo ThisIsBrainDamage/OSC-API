@@ -9,7 +9,6 @@ __version__ = 0.1
 
 
 # -Standard library imports-
-import os
 
 # -Third party imports-
 # Fastapi
