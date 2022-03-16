@@ -11,6 +11,11 @@ asyncpg = "^0.25.0"
 fastapi = "^0.75.0"
 python-dotenv = "^0.19.2"
 slowapi = "^0.1.5"
+aiosqlite = "^0.17.0"
+cryptography = "^36.0.2"
+pycryptodome = "^3.14.1"
+pydantic = "^1.9.0"
+python-multipart = "^0.0.5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
