@@ -30,5 +30,5 @@ if __name__ == "__main__":
     asyncio.run(create_database())
 
     asyncio.run(create_new_user(
-        "<username>", "<password>", 0
+        "FusionSid", "password", 0
     ))

@@ -1,10 +1,10 @@
 # -Standard library imports-
 import os
-from typing import List, Union
 
 # -Third party imports-
 import asyncpg
 from dotenv import load_dotenv
+from fastapi import HTTPException
 
 # -Local imports-
 from ..auth.classes import Item
@@ -25,11 +25,12 @@ async def inventory_insert(item : Item, quantity : int = 1) -> None:
     item_list = await connection.fetch("""SELECT * FROM Inventory WHERE name='{}'""".format(item.name))
     if not len(item_list):
         await connection.close()
-        return "Item doesn't exist"
+        raise HTTPException(404, "Item doesn't exist")
     else:
         quantity = (item_list[0][3]) + quantity
         await connection.execute("""UPDATE Inventory SET quantity={} WHERE name='{}'""".format(quantity, item.name))
     await connection.close()
+    return True
 
 
 async def new_item(item : Item, quantity : int = 1) -> None:
@@ -45,5 +46,6 @@ async def new_item(item : Item, quantity : int = 1) -> None:
         await connection.execute("""INSERT INTO Inventory (name, description, quantity) VALUES ('{}', '{}', {})""".format(item.name, item.description, quantity))
     else:
         await connection.close()
-        return "Item already exists"
+        raise HTTPException(409, "Item already exists")
     await connection.close()
+    return True
