@@ -2,8 +2,7 @@
 import os
 
 # Third party imports
-from fastapi import Depends, APIRouter, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi import Depends, APIRouter, HTTPException
 from dotenv import load_dotenv
 
 # Local imports
