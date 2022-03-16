@@ -77,7 +77,7 @@ Yay now you have a token, Now for all future requests put that token in the "Aut
 Users are creates and stored in a local sqlite database.  
 The `User` class has 3 attributes: username, hashed_password and disabled
 
-User passwords are stored hashed and encrypted using the `pbkdf2_hmac` and sha256 algorithms which is hard to reverse. Basicaly it encrypts the password+salt and then encrypts it again and again and again - How many times? I can't tell you cause it would ruin the security but i can tell you that its more that 150,000 iterations.
+User passwords are stored hashed and encrypted using the `pbkdf2_hmac` and `sha256` algorithms which is hard to reverse. Basicaly it encrypts the password+salt and then encrypts it again and again and again - How many times? I can't tell you cause it would ruin the security but i can tell you that its more that 150,000 iterations.
 
 The password is never actualy stored. It is encrypted using a process that will always return the same result so when you enter a password it will encrypt that and check if that result is the same as the encrypted one that is stored in the db.
 
@@ -110,14 +110,10 @@ Currently theres no way to create an account apart from using the function which
 
 Contributions are what make the open source community such an amazing place. Any contributions you make are greatly appreciated.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 ## License
 
 Distributed under the MIT License. See [LICENSE](/LICENCE) for more information.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 ## Contact
@@ -125,4 +121,3 @@ Distributed under the MIT License. See [LICENSE](/LICENCE) for more information.
 Siddhesh Zantye - [School Email](mailto:st22209@ormiston.school.nz)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
