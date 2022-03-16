@@ -35,9 +35,11 @@ this is api
 
 ## How it works / How to use
 
-### Authentication:
+### Authentication
 
-This api uses oauth2 but a simplified version. You use a username and password to get an access_token which you will use for your requests.
+**OAuth2:**
+
+This api uses a simplified version of OAuth2. You use a username and password to get an access_token which you will use for your requests.
 
 On every request sent to the api, The api will check the request body to check if it has the "Authorization" header
 
@@ -51,7 +53,8 @@ So how do you get a token?
 
 1. First of all you must have access to the API, you can create an account at the create_account endpoint and wait for your account to be enabled.
 
-2. Next you must make a POST request to the token endpoint. In the request data you attach your Username and Password. 
+2. Next you must make a POST request to the token endpoint. In the request data you attach your Username and Password.  
+
 Example in Python:
 ```py
 import requests
@@ -68,6 +71,17 @@ token = response["access_token"]
 
 Yay now you have a token, Now for all future requests put that token in the "Authorization" header, If you loose the token just make another request to the token endpoint
 
+
+**Users**:
+
+Users are creates and stored in a local sqlite database.  
+The `User` class has 3 attributes: username, hashed_password and disabled
+
+User passwords are stored hashed and encrypted using the `pbkdf2_hmac` and sha256 algorithms which is hard to reverse. Basicaly it encrypts the password+salt and then encrypts it again and again and again - How many times? I can't tell you cause it would ruin the security but i can tell you that its more that 150,000 iterations.
+
+The password is never actualy stored. It is encrypted using a process that will always return the same result so when you enter a password it will encrypt that and check if that result is the same as the encrypted one that is stored in the db.
+
+Currently theres no way to create an account apart from using the function which only i can do.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
