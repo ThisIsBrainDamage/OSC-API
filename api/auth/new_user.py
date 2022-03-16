@@ -8,6 +8,7 @@ import asyncio
 import aiosqlite
 from encryption import encrypt_text
 
+
 async def create_new_user(username : str, password : str, disabled : int = 1) -> None:
     password = await encrypt_text(password)
     async with aiosqlite.connect("api/auth/user.db") as db:
@@ -26,7 +27,8 @@ async def create_database() -> None:
 
 
 if __name__ == "__main__":
-    asyncio.run(create_new_user(
-        "", "", 0
-    ))
     asyncio.run(create_database())
+
+    asyncio.run(create_new_user(
+        "<username>", "<password>", 0
+    ))

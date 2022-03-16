@@ -77,16 +77,3 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
     if current_user.disabled == 1:
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
-
-
-@oauth.get("/users/me")
-async def read_users_me(current_user: User = Depends(get_current_active_user)):
-    """
-    Get basic info on your account
-    """
-    return current_user
-
-
-# @oauth.get("/create_account")
-# async def create_account(username : str, password : str):
-#     pass

@@ -25,7 +25,7 @@ from slowapi.errors import RateLimitExceeded
 import uvicorn
 
 # -Local imports- 
-from api import oauth
+from api import oauth, users
 
 
 limiter = Limiter(key_func=get_remote_address)
@@ -66,6 +66,7 @@ app.add_middleware(
 
 # Routers
 app.include_router(oauth)
+app.include_router(users)
 
 
 # Other
