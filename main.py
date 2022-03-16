@@ -33,12 +33,12 @@ limiter = Limiter(key_func=get_remote_address)
 
 # Description for api docs
 description = """
-### API TestOSCAPI
+### API for osc inventory website
 """
 
 # Creates an instance of the FastAPI class
 app = FastAPI(
-    title = "TestOSCAPI",
+    title = "OSC-API",
     description=description,
     license_info={
         "name": "MIT",
@@ -80,4 +80,4 @@ async def home(request : Request):
 
 # Run
 if __name__ == "__main__":
-  uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+  uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=False)
