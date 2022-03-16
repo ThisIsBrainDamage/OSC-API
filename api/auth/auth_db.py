@@ -1,39 +1,25 @@
+""" (module) auth_db
+
+This contains 
+"""
+
+# Standard library imports
 from typing import Union, List, Tuple, Optional
 
+# Third party imports
 import aiosqlite
-import hashlib
-from dotenv import load_dotenv
-import os
-import binascii
 
-from classes import DBUser
+# Local imports-
+from .encryption import encrypt_text
+from .classes import UserInDB, User
 
-async def encrypt_text(text : str) -> str:
-    """
-    Encrypts text 
-
-    Parameters:
-        text (str) : The text you want to encrypt
-
-    Returns:
-        str : The hashed text
-    """
-    load_dotenv()
-    SALT = (os.environ["SALT"]).encode()
-    ITERATIONS = int(os.environ["ITERATIONS"])
-
-    text = text.encode()
-
-    encrypted = hashlib.pbkdf2_hmac("sha256", text, SALT, ITERATIONS)
-
-    return binascii.hexlify(encrypted).decode()
 
 async def create_database() -> None:
     """
     Creates the users table
     Useful when you want to reset the users
     """
-    async with aiosqlite.connect("user.db") as db:
+    async with aiosqlite.connect("api/auth/user.db") as db:
         await db.execute("""CREATE TABLE IF NOT EXISTS Users (
             username TEXT NOT NULL,
             password TEXT NOT NULL,
@@ -44,12 +30,12 @@ async def create_database() -> None:
 
 async def create_new_user(username : str, password : str, disabled : int = 1) -> None:
     password = await encrypt_text(password)
-    async with aiosqlite.connect("user.db") as db:
+    async with aiosqlite.connect("api/auth/user.db") as db:
         await db.execute("""INSERT INTO Users (username, password, disabled) VALUES ("{}", "{}", {})""".format(username, password, disabled))
         await db.commit()
 
 
-async def get_user(username : str) -> Union[bool, DBUser]:
+async def get_user(username : str) -> Union[bool, UserInDB]:
     """
     Gets a specific user from the Users table if not found it will return False
 
@@ -59,7 +45,7 @@ async def get_user(username : str) -> Union[bool, DBUser]:
     Returns:
         Union[bool, DBUser]
     """
-    async with aiosqlite.connect("user.db") as db:
+    async with aiosqlite.connect("api/auth/user.db") as db:
         cur = await db.execute("""SELECT * FROM Users WHERE username='{}'""".format(username))
         db_result = await cur.fetchall()
         if not len(db_result):
@@ -69,7 +55,7 @@ async def get_user(username : str) -> Union[bool, DBUser]:
     disabled = db_result[0][2]
         
 
-    return DBUser(
+    return UserInDB(
         username=username,  
         hashed_password=hashed_password, 
         disabled=disabled
@@ -83,7 +69,7 @@ async def get_all_users() -> Optional[List[Tuple]]:
     Returns:
         Optional[List[Tuple]]
     """
-    async with aiosqlite.connect("user.db") as db:
+    async with aiosqlite.connect("api/auth/user.db") as db:
         data = await db.execute("SELECT * FROM Users")
         data = await data.fetchall()
 
@@ -91,3 +77,10 @@ async def get_all_users() -> Optional[List[Tuple]]:
         return None
 
     return data
+
+
+# import asyncio
+# if __name__ == "__main__":
+#     asyncio.run(create_new_user("", "", 1))
+
+

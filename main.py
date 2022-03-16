@@ -3,8 +3,10 @@ This is the main file for the api
 Contains config for the api and other info
 """
 
+
 __author__ = "Siddhesh Zantye"
 __version__ = 0.1
+
 
 # -Standard library imports-
 import os
@@ -24,8 +26,8 @@ from slowapi.errors import RateLimitExceeded
 import uvicorn
 
 # -Local imports- 
+from api import oauth
 
-# --End of imports--
 
 limiter = Limiter(key_func=get_remote_address)
 
@@ -44,9 +46,12 @@ app = FastAPI(
     },
 )
 
+# Adding rate limiting for the api
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
+
+# Added CORS, Probably will delete this because it isnt being used at the moment
 origins = [
     "http://localhost:8080",
 ]
@@ -59,8 +64,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Endpoitns
 
+# Routers
+app.include_router(oauth)
+
+
+# Other
 @app.get("/")
 async def home(request : Request):
     """
@@ -68,5 +77,7 @@ async def home(request : Request):
     """
     return RedirectResponse("/docs")
 
+
+# Run
 if __name__ == "__main__":
   uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

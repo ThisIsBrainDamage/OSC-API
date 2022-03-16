@@ -1,12 +1,18 @@
-from dataclasses import dataclass
+from typing import Optional
+# from dataclasses import dataclass
 
-@dataclass
-class User():
+from pydantic import BaseModel
+
+# @dataclass
+# class DBUser():
+#     username: str
+#     hashed_password: str
+#     disabled : bool
+
+class User(BaseModel):
     username: str
+    disabled: Optional[bool] = None
 
 
-@dataclass
-class DBUser():
-    username: str
+class UserInDB(User):
     hashed_password: str
-    disabled : bool
