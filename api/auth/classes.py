@@ -1,18 +1,17 @@
 from typing import Optional
-# from dataclasses import dataclass
 
 from pydantic import BaseModel
 
-# @dataclass
-# class DBUser():
-#     username: str
-#     hashed_password: str
-#     disabled : bool
-
 class User(BaseModel):
+    """
+    A base User - Used for authentication so its easier
+    """
     username: str
     disabled: Optional[bool] = None
-
+    
 
 class UserInDB(User):
+    """
+    A subclass of `User` with the `hashed_password` attribute
+    """
     hashed_password: str

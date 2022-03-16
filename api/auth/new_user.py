@@ -1,3 +1,8 @@
+""" 
+THIS FILE IS FOR TESTING
+RUNNING THIS WRONGLY WILL MIGHT DELETE DATA OR USERS
+"""
+
 import asyncio
 
 import aiosqlite

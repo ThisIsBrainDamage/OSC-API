@@ -1,6 +1,7 @@
 """ (module) auth_db
 
-This contains 
+This contains functions related to the users db, 
+This has the usernames and hashed passwords for oauth2 authentication
 """
 
 # Standard library imports
@@ -11,7 +12,7 @@ import aiosqlite
 
 # Local imports-
 from .encryption import encrypt_text
-from .classes import UserInDB, User
+from .classes import UserInDB
 
 
 async def create_database() -> None:
@@ -29,6 +30,15 @@ async def create_database() -> None:
 
 
 async def create_new_user(username : str, password : str, disabled : int = 1) -> None:
+    """
+    Creates a new user in the db
+    This is basically a new account to be used for the oauth2 authentication
+
+    Parameters:
+        :param: username (str) : The username for the account
+        :param: password (str) : The password for the account (will be stored encrypted)
+        :param: disabled (int, optional) : If the account is disabled or not (0 = False, 1 = True)
+    """
     password = await encrypt_text(password)
     async with aiosqlite.connect("api/auth/user.db") as db:
         await db.execute("""INSERT INTO Users (username, password, disabled) VALUES ("{}", "{}", {})""".format(username, password, disabled))
@@ -40,7 +50,7 @@ async def get_user(username : str) -> Union[bool, UserInDB]:
     Gets a specific user from the Users table if not found it will return False
 
     Parameters:
-        username (str) : The username to search for
+        :param username (str) : The username to search for
 
     Returns:
         Union[bool, DBUser]

@@ -1,12 +1,9 @@
-import hashlib
-from cryptography.fernet import Fernet
-from dotenv import load_dotenv
 import os
 import binascii
-import base64
-from Crypto.Cipher import AES
-from Crypto.Hash import SHA256
-from Crypto import Random
+import hashlib
+
+from cryptography.fernet import Fernet
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -15,7 +12,7 @@ async def encrypt_text(text : str) -> str:
     Encrypts text 
 
     Parameters:
-        text (str) : The text you want to encrypt
+        :param text (str) : The text you want to encrypt
 
     Returns:
         str : The hashed text
@@ -31,13 +28,33 @@ async def encrypt_text(text : str) -> str:
     return binascii.hexlify(encrypted).decode()
 
 
-async def encrypt_token(key, source):
+async def encrypt_token(key : str, source : str) -> str:
+    """
+    Encrypts a text into an auth token
+
+    Parameters:
+        :param key (str) : The key to use to encrypt the text
+        :param source (str) : The text you want to encrypt
+
+    Returns:
+        str : Source but encrypted
+    """
     fernet = Fernet(key)
     encrypted = fernet.encrypt(source.encode())
     return encrypted.decode()
 
 
-async def decrypt_token(key, source):
+async def decrypt_token(key : str, source : str) -> str:
+    """
+    Decrypts an encrypted token into a username which will be used to get the user from the token
+
+    Parameters:
+        :param key (str) : The key that was used to encrypt the text, this will reverse it
+        :param source (str) : The encrypted text you want to decrypt
+
+    Returns:
+        str : Source but encrypted
+    """
     fernet = Fernet(key)
     decrypted = fernet.decrypt(source.encode())
     return decrypted.decode()
