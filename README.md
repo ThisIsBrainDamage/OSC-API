@@ -31,7 +31,7 @@
 
 ## About The Project
 
-this is api
+This is an api that was gonna be used for school. I dont think it will be but i learn alot making it so yea.
 
 ## How it works / How to use
 
@@ -71,7 +71,6 @@ token = response["access_token"]
 
 Yay now you have a token, Now for all future requests put that token in the "Authorization" header, If you loose the token just make another request to the token endpoint
 
-
 **Users**:
 
 Users are creates and stored in a local sqlite database.  
@@ -83,6 +82,43 @@ The password is never actualy stored. It is encrypted using a process that will 
 
 Currently theres no way to create an account apart from using the function which only i can do.
 
+### Endpoints / API
+
+**Insert**
+
+Insert:
+
+
+
+New Item:
+
+
+
+**Delete**
+
+Delete:
+
+
+
+Delete All:
+
+
+
+**Get**
+
+Get All:
+
+
+
+Find Item:
+
+
+
+### Database
+
+Database is hosted somewhere and uses postgresql. I use asyncpg to send SQL commands to the database.
+
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Roadmap
@@ -93,11 +129,11 @@ Currently theres no way to create an account apart from using the function which
 
 - [x] Make the oauth2 system
 
-- [ ] Create the users endpoints
+- [x] Create the users endpoints
 
-- [ ] Create database functions
+- [x] Create database functions
 
-- [ ] Make db endpoints
+- [x] Make db endpoints
 
 - [ ] Refactor code
 
