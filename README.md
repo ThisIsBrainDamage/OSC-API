@@ -10,7 +10,8 @@
   <p align="center">
     An api to work with the database and return info to the frontend
     <br />
-    <a href="https://osc-api.fusionsid.repl.co/docs"><strong>Docs / Url »</strong></a>
+    <a href="https://osc-api.fusionsid.repl.co/docs"><strong>FastAPI Docs / Url »</strong>
+    <a href="https://thisisbraindamage.github.io/OSC-API/"><strong>Code DocsUrl »</strong></a>
     <br />
     <br />
   </p>
@@ -82,7 +83,7 @@ The password is never actualy stored. It is encrypted using a process that will 
 
 Currently theres no way to create an account apart from using the function which only i can do.
 
-### Endpoints / API
+<!-- ### Endpoints / API
 
 **Insert**
 
@@ -113,7 +114,7 @@ Get All:
 Find Item:
 
 
-
+ -->
 ### Database
 
 Database is hosted somewhere and uses postgresql. I use asyncpg to send SQL commands to the database.
