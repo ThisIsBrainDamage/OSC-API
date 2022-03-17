@@ -6,7 +6,7 @@ RUNNING THIS WRONGLY WILL MIGHT DELETE DATA OR USERS
 import asyncio
 
 import aiosqlite
-from encryption import encrypt_text
+from .encryption import encrypt_text
 
 
 async def create_new_user(username : str, password : str, disabled : int = 1) -> None:
