@@ -3,5 +3,5 @@
 *.pyc
 *.DS_Store
 *__pycache__
-
+docsrc
 test.py
