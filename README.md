@@ -32,7 +32,9 @@
 
 ## About The Project
 
-This is an api that was gonna be used for school. I dont think it will be but i learn alot making it so yea.
+This is an api that was gonna be used for school. 
+This api never ended up getting used because we weren't able to get the inventory list :(
+But i learnt alot making it so yea it's fine.
 
 ## How it works / How to use
 
@@ -52,7 +54,7 @@ Then the api will lastly find a user with that info and if it finds a user then 
 
 So how do you get a token?
 
-1. First of all you must have access to the API, you can create an account at the create_account endpoint and wait for your account to be enabled.
+1. First of all you must have access to the API, you can't currently make an account and since this project is archived I won't be adding more account either 
 
 2. Next you must make a POST request to the token endpoint. In the request data you attach your Username and Password.  
 
@@ -77,7 +79,7 @@ Yay now you have a token, Now for all future requests put that token in the "Aut
 Users are creates and stored in a local sqlite database.  
 The `User` class has 3 attributes: username, hashed_password and disabled
 
-User passwords are stored hashed and encrypted using the `pbkdf2_hmac` and `sha256` algorithms which is hard to reverse. Basicaly it encrypts the password+salt and then encrypts it again and again and again - How many times? I can't tell you cause it would ruin the security but i can tell you that its more that 150,000 iterations.
+User passwords are stored hashed and encrypted using the `pbkdf2_hmac` and `sha256` algorithms which is impossible to reverse. Basicaly it encrypts the password+salt and then encrypts it again and again and again - How many times? definitely more that 150,000 iterations.
 
 The password is never actualy stored. It is encrypted using a process that will always return the same result so when you enter a password it will encrypt that and check if that result is the same as the encrypted one that is stored in the db.
 
@@ -136,9 +138,9 @@ Database is hosted somewhere and uses postgresql. I use asyncpg to send SQL comm
 
 - [x] Make db endpoints
 
-- [ ] Refactor code
+- [x] Reformat code
 
-- [ ] Documentation for code
+- [x] Documentation for code
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
